@@ -23,26 +23,33 @@ public class Eagle extends Bird implements Fly {
     }
 
     @Override
-    public void takeOff() {
-        System.out.println(this.name + " takes off " + " the sky")
+    public void takeOff() { // Si mon altitude est supérieur à 0 je décolle
+        if (this.flying && this.altitude > 0)
+        System.out.println(this.getName() + " takes off in the sky");
     }
 
     @Override
-    public void ascend(int meters) {
-        System.out.println(this.name + " flies upward, altitude : " + this.altitude);
+    public void ascend() { // Fonction permettant d'augmenter son altitude
+        if (this.flying) {
+            this.altitude = Math.max(this.altitude + meters, 0)
+            System.out.println(this.getName() + "flies upward, altitude : " + this.getAltitude());
+        }
+        return this.altitude;
     }
 
     @Override
-    public void descend(int meters) {
-        System.out.println(this.name + " flies downward, altitude : " + this.altitude);
+    public void descend() { // Fonction permettant de diminuer son altitude
+        if (this.flying) {
+            this.altitude = Math.max(this.altitude - meters, 0)
+            System.out.println(this.getName() + "flies downward, altitude : " + this.getAltitude());
+        }
+        return this.altitude;
     }
 
     @Override
-    public void land() {
-        if this.altitude >= 10{
-            System.out.println(this.name + " is too high, it can't lands.");
-        } else {
-            System.out.println(this.name + " lands on the ground.");
+    public void land() { // Si mon altitude est égale 0 je dis que j'atterris
+        if (!this.flying && this.altitude == 0) {
+            System.out.println(this.getName() + " Eye Cherry lands on the ground.");
         }
     }
 }
