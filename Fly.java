@@ -2,9 +2,9 @@ public interface Fly {
 
     void takeOff();
 
-    void ascend(int meters);
+    int ascend(int meters);
 
-    void descend(int meters);
+    int descend(int meters);
 
     void land();
 

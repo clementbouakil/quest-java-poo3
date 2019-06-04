@@ -22,34 +22,40 @@ public class Eagle extends Bird implements Fly {
         return "Screech!";
     }
 
-    @Override
-    public void takeOff() { // Si mon altitude est supérieur à 0 je décolle
-        if (this.flying && this.altitude > 0)
-        System.out.println(this.getName() + " takes off in the sky");
+    @Override // décollage
+    public void takeOff() {
+        if (!this.flying && this.altitude == 0) { // si false ET altitude = 0
+            this.flying = true; // alors true
+            System.out.println(this.getName() + " takes off in the sky.");
+        }
     }
 
-    @Override
-    public void ascend() { // Fonction permettant d'augmenter son altitude
-        if (this.flying) {
-            this.altitude = Math.max(this.altitude + meters, 0)
-            System.out.println(this.getName() + "flies upward, altitude : " + this.getAltitude());
+    @Override // augmentation altitude
+    public int ascend(int meters) {
+        if (this.flying) { // si true
+            this.altitude = Math.min(this.altitude + meters, 10000); // prendre la valeur minimum entre altitude et 1000
+            System.out.println(this.getName() + " flies upward, altitude : " + this.altitude);
         }
         return this.altitude;
     }
 
-    @Override
-    public void descend() { // Fonction permettant de diminuer son altitude
-        if (this.flying) {
-            this.altitude = Math.max(this.altitude - meters, 0)
-            System.out.println(this.getName() + "flies downward, altitude : " + this.getAltitude());
+    @Override // diminution altitude
+    public int descend(int meters) {
+        if (this.flying) { // si true
+            this.altitude = Math.max(this.altitude - meters, 1); // prendre la valeur maximum entre altitude et 1
+            System.out.println(this.getName() + " flies downward, altitude : " + this.altitude);
         }
         return this.altitude;
     }
 
-    @Override
-    public void land() { // Si mon altitude est égale 0 je dis que j'atterris
-        if (!this.flying && this.altitude == 0) {
-            System.out.println(this.getName() + " Eye Cherry lands on the ground.");
+    @Override // atterrisage
+    public void land() {
+        if (this.flying && this.altitude == 1) { // si true && altitude = 1
+            this.altitude = 0;
+            this.flying = false;
+            System.out.println(this.getName() + " lands on the ground.");
+        } else {
+            System.out.println(this.getName() + " is too high, it can't lands.");
         }
     }
 }
